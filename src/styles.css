@@ -3,14 +3,14 @@
     padding: 0;
     box-sizing: border-box;
   }
-
+  
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background-color: #263238;
     color: white;
   }
-
+  
   h1,
   h2,
   h3,
@@ -18,14 +18,14 @@
   h5 {
     font-weight: normal;
   }
-
+  
   header {
     padding: 10px;
     display: flex;
     align-items: end;
     justify-content: space-between;
   }
-
+  
   .btn-danger {
     border: 1px solid transparent;
     border-radius: 4px;
@@ -35,11 +35,11 @@
     font-family: inherit;
     font-size: 14px;
   }
-
+  
   .hide {
     display: none !important;
   }
-
+  
   form {
     max-width: 450px;
     margin: 30px auto;
@@ -47,7 +47,7 @@
     border-radius: 8px;
     padding: 20px;
   }
-
+  
   input {
     display: block;
     width: 100%;
@@ -59,15 +59,18 @@
     color: inherit;
     font-family: inherit;
   }
-
+  
   input::placeholder {
     color: #aaa;
   }
-
+  
   .input-container {
     margin-bottom: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
   }
-
+  
   .btn-primary {
     border: 1px solid transparent;
     border-radius: 4px;
@@ -77,32 +80,32 @@
     font-family: inherit;
     font-size: 14px;
   }
-
+  
   form h2,
   .conference-section h2 {
     margin-bottom: 20px;
   }
-
+  
   .conference-section {
     padding: 20px 30px;
     max-width: 960px;
     margin: 0 auto;
   }
-
+  
   .conference-section h2 {
     text-align: center;
     font-size: 32px;
     padding-bottom: 10px;
     border-bottom: 1px solid #546e7a;
   }
-
+  
   #peers-container {
     display: grid;
     grid-template-columns: repeat(3, minmax(min-content, 1fr));
     place-items: center;
     grid-gap: 10px;
   }
-
+  
   .peer-video {
     height: 250px;
     width: 250px;
@@ -110,20 +113,20 @@
     object-fit: cover;
     margin-bottom: 10px;
   }
-
+  
   .local.peer-video {
     transform: scaleX(-1);
   }
-
+  
   .peer-name {
     font-size: 14px;
     text-align: center;
   }
-
+  
   .peer-tile {
     padding: 10px;
   }
-
+  
   .control-bar {
     display: flex;
     position: fixed;
@@ -133,11 +136,11 @@
     justify-content: center;
     z-index: 10;
   }
-
+  
   .control-bar > *:not(:first-child) {
     margin-left: 8px;
   }
-
+  
   .btn-control {
     font-size: 12px;
     text-transform: uppercase;
@@ -151,3 +154,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     color: white;
   }
+
+  .separator {
+    font-size: 12px;
+  }
+  
