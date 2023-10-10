@@ -4,7 +4,6 @@ import {
   selectIsLocalVideoEnabled,
   selectPeers,
   selectIsConnectedToRoom,
-  selectVideoTrackByID,
 } from "@100mslive/hms-video-store";
 
 // Initialize HMS Store
@@ -28,10 +27,11 @@ const renderedPeerIDs = new Set();
 
 // Joining the room
 joinBtn.onclick = async () => {
-  const roomCode = document.getElementById("room-code").value
-  const userName = document.getElementById("name").value
-  const authToken = await hmsActions.getAuthTokenByRoomCode({ roomCode })
-
+  const userName = document.getElementById("name").value;
+  const roomCode = document.getElementById("room-code").value;
+  // use room code to fetch auth token
+  const authToken = await hmsActions.getAuthTokenByRoomCode({ roomCode });
+  // join room using username and auth token
   hmsActions.join({
     userName,
     authToken
@@ -64,17 +64,8 @@ function renderPeer(peer) {
   videoElement.muted = true;
   videoElement.playsinline = true;
   peerTileName.textContent = peer.name;
-
-  hmsStore.subscribe((track) => {
-    if (!track) {
-      return;
-    }
-    if (track.enabled) {
-      hmsActions.attachVideo(track.id, videoElement);
-    } else {
-      hmsActions.detachVideo(track.id, videoElement);
-    }
-  }, selectVideoTrackByID(peer.videoTrack));
+  
+  hmsActions.attachVideo(peer.videoTrack, videoElement);
 
   peerTileDiv.append(videoElement);
   peerTileDiv.append(peerTileName);
@@ -97,18 +88,17 @@ function renderPeers() {
 // Reactive state - renderPeers is called whenever there is a change in the peer-list
 hmsStore.subscribe(renderPeers, selectPeers);
 
-
 // Mute and unmute audio
-muteAudio.onclick = async () => {
+muteAudio.onclick = () => {
   const audioEnabled = !hmsStore.getState(selectIsLocalAudioEnabled);
-  await hmsActions.setLocalAudioEnabled(audioEnabled);
+  hmsActions.setLocalAudioEnabled(audioEnabled);
   muteAudio.textContent = audioEnabled ? "Mute" : "Unmute";
 };
 
 // Mute and unmute video
-muteVideo.onclick = async () => {
+muteVideo.onclick = () => {
   const videoEnabled = !hmsStore.getState(selectIsLocalVideoEnabled);
-  await hmsActions.setLocalVideoEnabled(videoEnabled);
+  hmsActions.setLocalVideoEnabled(videoEnabled);
   muteVideo.textContent = videoEnabled ? "Hide" : "Unhide";
 };
 
